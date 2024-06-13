@@ -1,0 +1,118 @@
+# RiskyRovers
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DiamondSqaureTerrain : MonoBehaviour
+{
+    public int size = 513; // Size of the grid (2^n + 1)
+    public float roughness = 0.5f; // Roughness factor for the terrain
+    public float heightScale = 10f; // Scale of the terrain height
+
+    void Start()
+    {
+        float[,] terrain = GenerateTerrain(size, roughness);
+        GenerateMesh(terrain);
+    }
+
+    float[,] GenerateTerrain(int size, float roughness)
+    {
+        float[,] terrain = new float[size, size];
+
+        // Initialize the corners
+        terrain[0, 0] = terrain[0, size - 1] = terrain[size - 1, 0] = terrain[size - 1, size - 1] = size;
+
+        int stepSize = size - 1;
+        float scale = roughness;
+        System.Random random = new System.Random();
+
+        while (stepSize > 1)
+        {
+            int halfStep = stepSize / 2;
+
+            // Diamond step
+            for (int x = 0; x < size - 1; x += stepSize)
+            {
+                for (int y = 0; y < size - 1; y += stepSize)
+                {
+                    float avg = (terrain[x, y] + terrain[x + stepSize, y] + terrain[x, y + stepSize] + terrain[x + stepSize, y + stepSize]) / 4.0f;
+                    terrain[x + halfStep, y + halfStep] = avg + (float)(random.NextDouble() * 2 * scale - scale);
+                }
+            }
+
+            // Square step
+            for (int x = 0; x < size - 1; x += halfStep)
+            {
+                for (int y = (x + halfStep) % stepSize; y < size - 1; y += stepSize)
+                {
+                    float avg = (
+                        terrain[(x - halfStep + size - 1) % (size - 1), y] +
+                        terrain[(x + halfStep) % (size - 1), y] +
+                        terrain[x, (y + halfStep) % (size - 1)] +
+                        terrain[x, (y - halfStep + size - 1) % (size - 1)]
+                    ) / 4.0f;
+                    avg = avg + (float)(random.NextDouble() * 2 * scale - scale);
+                    terrain[x, y] = avg;
+
+                    // Handle the edges
+                    if (x == 0) terrain[size - 1, y] = avg;
+                    if (y == 0) terrain[x, size - 1] = avg;
+                }
+            }
+
+            stepSize /= 2;
+            scale *= roughness;
+        }
+
+        return terrain;
+    }
+
+    void GenerateMesh(float[,] heightMap)
+    {
+        int width = heightMap.GetLength(0);
+        int height = heightMap.GetLength(1);
+
+        Vector3[] vertices = new Vector3[width * height];
+        Vector2[] uv = new Vector2[width * height];
+        int[] triangles = new int[(width - 1) * (height - 1) * 6];
+
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                vertices[y * width + x] = new Vector3(x, heightMap[x, y] * heightScale, y);
+                uv[y * width + x] = new Vector2((float)x / width, (float)y / height);
+            }
+        }
+
+        int tris = 0;
+        for (int y = 0; y < height - 1; y++)
+        {
+            for (int x = 0; x < width - 1; x++)
+            {
+                triangles[tris + 0] = y * width + x;
+                triangles[tris + 1] = y * width + x + 1;
+                triangles[tris + 2] = (y + 1) * width + x;
+
+                triangles[tris + 3] = (y + 1) * width + x;
+                triangles[tris + 4] = y * width + x + 1;
+                triangles[tris + 5] = (y + 1) * width + x + 1;
+
+                tris += 6;
+            }
+        }
+
+        Mesh mesh = new Mesh();
+        mesh.vertices = vertices;
+        mesh.uv = uv;
+        mesh.triangles = triangles;
+        mesh.RecalculateNormals();
+
+        MeshFilter meshFilter = gameObject.AddComponent<MeshFilter>();
+        MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
+
+        meshFilter.mesh = mesh;
+        meshRenderer.material = new Material(Shader.Find("Standard"));
+    }
+
+}
