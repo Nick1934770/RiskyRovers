@@ -1876,8 +1876,8 @@ GameObject:
   - component: {fileID: 958949963}
   - component: {fileID: 958949962}
   - component: {fileID: 958949961}
-  - component: {fileID: 958949964}
   - component: {fileID: 958949965}
+  - component: {fileID: 958949966}
   m_Layer: 5
   m_Name: PopUpMenu2
   m_TagString: Untagged
@@ -1947,19 +1947,6 @@ RectTransform:
   m_AnchoredPosition: {x: -501.97903, y: 183.7063}
   m_SizeDelta: {x: -1203.8071, y: -518.9572}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &958949964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 958949960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dad7f4c7db7ba9347b5a909c401e585f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  path: 
 --- !u!114 &958949965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1970,6 +1957,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffd6ea24115c70741a6a737e57c403fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &958949966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958949960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffa331a8e0344b346aa817f779ea4d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1046669372
@@ -3629,9 +3628,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 958949960}
+      - m_Target: {fileID: 958949966}
         m_TargetAssemblyTypeName: FileExplorer, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: OpenExplorer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3835,6 +3834,7 @@ GameObject:
   - component: {fileID: 2081609963}
   - component: {fileID: 2081609968}
   - component: {fileID: 2081609969}
+  - component: {fileID: 2081609970}
   m_Layer: 0
   m_Name: Rover
   m_TagString: Untagged
@@ -4145,6 +4145,18 @@ MonoBehaviour:
   maxHealth: 50
   healthBarSlider: {fileID: 781142396}
   fillImage: {fileID: 798284031}
+--- !u!114 &2081609970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081609962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffa331a8e0344b346aa817f779ea4d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2098411909
 GameObject:
   m_ObjectHideFlags: 0
