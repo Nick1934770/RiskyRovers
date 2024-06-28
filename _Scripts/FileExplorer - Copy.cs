@@ -20,24 +20,24 @@ public class FileExplorer : MonoBehaviour
        {
            int startIndex = basePath.Length+1; // Index of the comma
             string modifiedString = path.Substring(startIndex);
-            Debug.Log(modifiedString);
+          
             if (modifiedString == "forward-10.txt")
             {
-                rover.transform.Translate(.8f, 0,0);
+                rover.transform.Translate(1f, 0,0);
             }
 
             else if (modifiedString == "backward-10.txt")
             {
-                rover.transform.Translate(-.8f, 0,0);
+                rover.transform.Translate(-1f, 0,0);
             }
 
             else if (modifiedString == "downward-10.txt")
             {
-                rover.transform.Translate(0, -.8f,0);
+                rover.transform.Translate(0, -1f,0);
             }
               else if (modifiedString == "upward-10.txt")
             {
-                rover.transform.Translate(0, .8f,0);
+                rover.transform.Translate(0, 1f,0);
             }
         }
         else
