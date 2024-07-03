@@ -14,7 +14,7 @@ public class ButtonHandler : MonoBehaviour
 
     void ToggleMenu()
     {
-        
+        Debug.Log("Button Clicked!");
         if (menuManager.popUpMenu.activeSelf)
         {
             menuManager.HideMenu(); // Hide the menu if it's currently active
