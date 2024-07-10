@@ -13,7 +13,7 @@ public class FileExplorer : MonoBehaviour
 
     public void OpenExplorer()
     {
-        rover = GameObject.Find("Rover");
+        //rover = GameObject.Find("Rover");
 
         string basePath = "C:\\Commands\\movement-files";
         path = EditorUtility.OpenFilePanel("","Commands" , "movement-files");
@@ -24,21 +24,21 @@ public class FileExplorer : MonoBehaviour
           
             if (modifiedString == "forward-10.txt")
             {
-                rover.transform.Translate(2f, 0,0);
+                rover.transform.Translate(1f, 0,0);
             }
 
             else if (modifiedString == "backward-10.txt")
             {
-                rover.transform.Translate(-2f, 0,0);
+                rover.transform.Translate(-1f, 0,0);
             }
 
             else if (modifiedString == "downward-10.txt")
             {
-                rover.transform.Translate(0, -2f,0);
+                rover.transform.Translate(0, -1f,0);
             }
               else if (modifiedString == "upward-10.txt")
             {
-                rover.transform.Translate(0, 2f,0);
+                rover.transform.Translate(0, 1f,0);
             }
         }
         else

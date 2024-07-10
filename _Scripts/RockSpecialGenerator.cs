@@ -22,7 +22,7 @@ public class RockSpecialGenerator : MonoBehaviour
 
     void GenerateRocks()
     {
-        numberOfRocks = PlayerPrefs.GetInt("numberOfRocks");
+        //numberOfRocks = PlayerPrefs.GetInt("numberOfRocks");
         List<Vector2> rockPositions = new List<Vector2>();
 
         for (int i = 0; i < numberOfRocks; i++)
