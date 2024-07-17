@@ -13,7 +13,7 @@ public class FileExplorer : MonoBehaviour
 
     public void OpenExplorer()
     {
-        //rover = GameObject.Find("Rover");
+        rover = GameObject.Find("Rover");
 
         string basePath = "C:\\Commands\\movement-files";
         path = EditorUtility.OpenFilePanel("","Commands" , "movement-files");

@@ -6,7 +6,7 @@ public class HealthBarToggleManager : MonoBehaviour
     public Slider movementHealthSlider; // Reference to the movement health slider
     public Slider collisionHealthSlider; // Reference to the collision health slider
     public Button toggleButton; // Reference to the toggle button
-    private Text toggleButtonText; // Reference to the Text component of the button
+    private Text toggleButtonText; // Reference to the Text component of the button    
 
     private bool areSmallHealthBarsVisible = false;
 
@@ -27,8 +27,6 @@ public class HealthBarToggleManager : MonoBehaviour
     {
         areSmallHealthBarsVisible = !areSmallHealthBarsVisible;
         movementHealthSlider.gameObject.SetActive(areSmallHealthBarsVisible);
-        collisionHealthSlider.gameObject.SetActive(areSmallHealthBarsVisible);
-
-       
+        collisionHealthSlider.gameObject.SetActive(areSmallHealthBarsVisible);       
     }
 }
