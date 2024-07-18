@@ -1,9 +1,9 @@
-
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-     public static MusicManager instance;
+     private static MusicManager instance;
     private AudioSource audioSource;
 
     public AudioClip defaultMusic;
@@ -16,7 +16,6 @@ public class MusicManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
             audioSource = GetComponent<AudioSource>();
-            PlayMusic(defaultMusic);
         }
         else
         {
@@ -24,28 +23,19 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    public void PlayMusic(AudioClip clip)
+    private void Start()
     {
-        if (audioSource.clip != clip)
-        {
-            audioSource.clip = clip;
-            audioSource.Play();
-        }
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void OnEnable()
+    private void OnDestroy()
     {
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private void OnDisable()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
-    {
-        if (scene.name == "SpecialScene")  // Replace "SpecialScene" with the name of your special scene
+        if (scene.name == "the real 1")  // Replace "SpecialScene" with the name of your special scene
         {
             PlayMusic(specialSceneMusic);
         }
@@ -53,5 +43,12 @@ public class MusicManager : MonoBehaviour
         {
             PlayMusic(defaultMusic);
         }
+    }
+
+    public void PlayMusic(AudioClip clip)
+    {
+        audioSource.Stop();  // Stop the current music
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 }
